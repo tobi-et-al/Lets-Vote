@@ -1,0 +1,54 @@
+html  
+  head
+    meta(name='description' content='A cool thing made with Glitch')
+    link(id='favicon' rel=icon href='https://glitch.com/edit/favicon-app.ico' type="image/x-icon")  
+    link(rel='stylesheet'   href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'  )
+    link(rel='stylesheet'   href='/style.css'  )
+
+    title= title
+  body
+    header      
+      if authorised
+        | logged in
+    div(class="container")
+      div(class="col-xs-12")
+        div(class="col-xs-7")
+          h1 Votes r's in #{message}
+          div(class="col-xs-12")
+            
+
+        div(class="col-xs-5")
+        
+          if !authorised
+            | login [ 
+            a(href="/auth/twitter")
+               button(class="twitter" type="submit") twitter 
+            |  ]
+          
+          
+          if authorised
+       
+            | Welcome [ 
+            span(class="lead") #{user.twitter.name} 
+            a(href="/profile")
+               button(class="byeeee btn-link  btn-xs " type="submit") profile 
+            a(href="/poll/my")
+               button(class="byeeee btn-link  btn-xs " type="submit") my polls 
+            a(href="/poll/create")
+               button(class="byeeee btn-link  btn-xs " type="submit") create poll 
+            a(href="/logout")
+               button(class="byeeee btn-link  btn-xs " type="submit") signout 
+            |  ]
+          
+      div(class="col-xs-12")
+              div(class="col-xs-12")  
+                h2 
+                  u Profile
+              blockquote(class="col-xs-12")  Username: #{user.twitter.name} 
+              blockquote(class="col-xs-12")  Profile picture: #{user.twitter.profile_image} 
+
+      footer(class="text-center col-xs-12")
+        a(href="https://github.com/tobi-et-al") Built with ❤️ &amp; 🍪 by toebee
+        
+script(src="https://code.jquery.com/jquery-2.2.1.min.js")
+script(src="/client.js")

@@ -1,0 +1,106 @@
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        var lastName = root,
+            namespace = 'allColors.ideaColorThemes.modernClassicDark'.split('.');
+
+        for (var i = 0; i < namespace.length; i++) {
+            if (lastName[namespace[i]] === undefined) {
+                lastName = lastName[namespace[i]] = {};
+            }
+        }
+
+        root.allColors.ideaColorThemes.modernClassicDark = factory();
+    }
+}(this, function() {
+    return [
+        '#295622',
+        '#8b999f',
+        '#bbbbbb',
+        '#2b2b2b',
+        '#629755',
+        '#6c6c6c',
+        '#848504',
+        '#d5756c',
+        '#9876aa',
+        '#6897bb',
+        '#d1675a',
+        '#313335',
+        '#373737',
+        '#888888',
+        '#4d4d4d',
+        '#415f69',
+        '#5c5c42',
+        '#574300',
+        '#323232',
+        '#505050',
+        '#787878',
+        '#214283',
+        '#555555',
+        '#a5a5a5',
+        '#ff0000',
+        '#3a2323',
+        '#769aa5',
+        '#536c46',
+        '#7eaef1',
+        '#5394ec',
+        '#6cdada',
+        '#33cccc',
+        '#ff6b68',
+        '#999999',
+        '#70ff70',
+        '#ff99ff',
+        '#ff70ff',
+        '#ff8785',
+        '#ffff00',
+        '#cdcd00',
+        '#589df6',
+        '#cc7832',
+        '#ab51ba',
+        '#c93b48',
+        '#6a8759',
+        '#4646f1',
+        '#808080',
+        '#c3c3c3',
+        '#45302b',
+        '#8f5247',
+        '#484a4a',
+        '#656e76',
+        '#294436',
+        '#447152',
+        '#385570',
+        '#43698d',
+        '#ffffff',
+        '#bc3f3c',
+        '#9373a5',
+        '#2d6099',
+        '#8c8c8c',
+        '#3a3a3a',
+        '#287bde',
+        '#aeae80',
+        '#5f5f5f',
+        '#eaeaea',
+        '#485848',
+        '#715353',
+        '#80805a',
+        '#908b25',
+        '#c4b3a3',
+        '#80b000',
+        '#cdbcac',
+        '#219598',
+        '#155221',
+        '#246e00',
+        '#532b2e',
+        '#425f44',
+        '#a9b7c6',
+        '#56ac48',
+        '#c7c8f5',
+        '#867f27',
+        '#d1243b',
+        '#c55450',
+        '#e8bf6a'
+    ];
+}));

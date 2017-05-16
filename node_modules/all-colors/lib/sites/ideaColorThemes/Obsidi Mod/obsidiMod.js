@@ -1,0 +1,81 @@
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        var lastName = root,
+            namespace = 'allColors.ideaColorThemes.obsidiMod'.split('.');
+
+        for (var i = 0; i < namespace.length; i++) {
+            if (lastName[namespace[i]] === undefined) {
+                lastName = lastName[namespace[i]] = {};
+            }
+        }
+
+        root.allColors.ideaColorThemes.obsidiMod = factory();
+    }
+}(this, function() {
+    return [
+        '#295622',
+        '#bbbbbb',
+        '#2f393c',
+        '#293134',
+        '#629755',
+        '#6c6c6c',
+        '#848504',
+        '#d5756c',
+        '#9876aa',
+        '#6897bb',
+        '#d1675a',
+        '#804000',
+        '#81969a',
+        '#415f69',
+        '#574300',
+        '#323232',
+        '#e0e2e4',
+        '#505050',
+        '#678cb1',
+        '#a082bd',
+        '#3a2323',
+        '#7d8c93',
+        '#5394ec',
+        '#ec7600',
+        '#983498',
+        '#ff6b68',
+        '#ffcd22',
+        '#93c763',
+        '#c4bf9b',
+        '#e8e2b7',
+        '#8ab5c5',
+        '#8fb7d6',
+        '#cdce97',
+        '#df6e84',
+        '#e8e279',
+        '#c9ceb6',
+        '#d19687',
+        '#45302b',
+        '#8f5247',
+        '#484a4a',
+        '#656e76',
+        '#294436',
+        '#447152',
+        '#385570',
+        '#43698d',
+        '#5e5339',
+        '#bc3f3c',
+        '#2d6099',
+        '#287bde',
+        '#f49810',
+        '#616161',
+        '#aeae80',
+        '#660e7a',
+        '#ff8647',
+        '#808080',
+        '#a8c023',
+        '#867f27',
+        '#d1243b',
+        '#52503a',
+        '#8c8c00'
+    ];
+}));

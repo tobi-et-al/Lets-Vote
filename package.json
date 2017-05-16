@@ -1,0 +1,38 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "polls-app",
+  "version": "0.0.1",
+  "description": "What am I about?",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "all-colors": "^1.0.6",
+    "body-parser": "^1.17.1",
+    "cookie-session": "^1.2.0",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.7",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
+    "promise": "^7.1.1",
+    "pug": "^0.1.0",
+    "underscore": "^1.8.3",
+    "uuid": "^3.0.1"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/welcome-project"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

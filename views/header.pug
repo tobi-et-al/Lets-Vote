@@ -1,0 +1,30 @@
+header      
+  if authorised
+  | logged in
+div(class="container")
+  div(class="col-xs-12")
+    div(class="col-xs-7")
+      h1 Votes r's in #{message}
+      div(class="col-xs-12")=JSON.stringify(user)
+
+    div(class="col-xs-5")
+
+      if !authorised
+        | login [ 
+        a(href="/auth/twitter")
+           button(class="twitter" type="submit") twitter 
+        |  ]
+
+      if authorised
+        | Welcome [ 
+        a(href="/profile")
+           button(class="byeeee btn-link  btn-xs " type="submit") profile 
+        a(href="/poll/my")
+           button(class="byeeee btn-link  btn-xs " type="submit") my polls 
+        a(href="/poll/create")
+           button(class="byeeee btn-link  btn-xs " type="submit") create poll 
+        a(href="/logout")
+           button(class="byeeee btn-link  btn-xs " type="submit") signout 
+        |  ]
+
+

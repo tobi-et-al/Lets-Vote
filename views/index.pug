@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content 
+  div(class="col-xs-12 text-center")
+    div(class="col-xs-12 text-center text-upper")
+      h5="Below are polls currently running..."
+      h5="click a poll to see the results and vote, or sign-in to make a new poll"
+     
+    div(class="col-xs-12 text-center")
+      br
+      div(class="list-group" id="poll")
+        each val in polls.length ? polls : ['There are no values']
+          a(href='/poll/view/' + val.uid class="list-group-item text-center list-group-item")
+            h4=val.title
+block foot 

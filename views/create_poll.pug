@@ -1,0 +1,64 @@
+html  
+  head
+    meta(name='description' content='A cool thing made with Glitch')
+    link(id='favicon' rel=icon href='https://glitch.com/edit/favicon-app.ico' type="image/x-icon")  
+    link(rel='stylesheet'   href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'  )
+    link(rel='stylesheet'   href='/style.css'  )
+
+    title= title
+  body(class="createPoll")
+    header      
+      if authorised
+        | logged in
+    div(class="container")
+      div(class="col-xs-12")
+        div(class="col-xs-7")
+          h1 Votes r's in #{message}
+          div(class="col-xs-12")
+            
+
+        div(class="col-xs-5")
+        
+          if !authorised
+            | login [ 
+            a(href="/auth/twitter")
+               button(class="twitter" type="submit") twitter 
+            |  ]
+          
+          
+          if authorised
+       
+            | Welcome [ 
+            span(class="lead") #{user.twitter.name} 
+            a(href="/profile")
+               button(class="byeeee btn-link  btn-xs " type="submit") profile 
+            a(href="/poll/my")
+               button(class="byeeee btn-link  btn-xs " type="submit") my polls 
+            a(href="/poll/create")
+               button(class="byeeee btn-link  btn-xs " type="submit") create poll 
+            a(href="/logout")
+               button(class="byeeee btn-link  btn-xs " type="submit") signout 
+            |  ]
+          
+      div(class="col-xs-12")
+              div(class="col-xs-12" id="poll")  
+                h2 
+                  u Make a new poll!
+                  
+                div(class="col-xs-12")  
+                      form(id="createPoll" method='post' action="/poll/create")
+                        div(class="col-xs-12")  
+                          label Title
+                          input(id="title" class="form-control")
+                          label Options (seperated by line):
+                          textarea(id="options"  class="form-control")
+                        div(class="col-xs-12")  
+                          br
+                        div(class="col-xs-12 clearfix")  
+                          button(type="submit" value="submit" class="btn pull-right") submit
+
+      footer(class="text-center col-xs-12")
+        a(href="https://github.com/tobi-et-al") Built with ❤️ &amp; 🍪 by toebee
+        
+script(src="https://code.jquery.com/jquery-2.2.1.min.js")
+script(src="/client.js")

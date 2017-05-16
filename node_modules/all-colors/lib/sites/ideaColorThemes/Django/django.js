@@ -1,0 +1,105 @@
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        var lastName = root,
+            namespace = 'allColors.ideaColorThemes.django'.split('.');
+
+        for (var i = 0; i < namespace.length; i++) {
+            if (lastName[namespace[i]] === undefined) {
+                lastName = lastName[namespace[i]] = {};
+            }
+        }
+
+        root.allColors.ideaColorThemes.django = factory();
+    }
+}(this, function() {
+    return [
+        '#a7a7a7',
+        '#1b1b1b',
+        '#141414',
+        '#234f32',
+        '#808080',
+        '#f4f101',
+        '#d2a8a1',
+        '#9aef3f',
+        '#743d3d',
+        '#cda869',
+        '#afc4db',
+        '#5f5a60',
+        '#ca7840',
+        '#8f9d6a',
+        '#ffb3b3',
+        '#ffffff',
+        '#e4e4ff',
+        '#6ae96a',
+        '#80807f',
+        '#ffc757',
+        '#92cc47',
+        '#f4e100',
+        '#c5af75',
+        '#c3ffb3',
+        '#b0b04a',
+        '#ffe492',
+        '#ffff00',
+        '#cf7d34',
+        '#e2ffe2',
+        '#c3c3c3',
+        '#f0f0f0',
+        '#c0c0c0',
+        '#763f34',
+        '#ff6647',
+        '#5b5b5b',
+        '#747474',
+        '#2f632f',
+        '#99ff99',
+        '#465983',
+        '#99ccff',
+        '#dad085',
+        '#e0c589',
+        '#ccffcc',
+        '#30322b',
+        '#ff6767',
+        '#ff0000',
+        '#101',
+        '#3c3d3c',
+        '#c7c7ff',
+        '#161717',
+        '#aa4e00',
+        '#f49810',
+        '#bdbdbd',
+        '#494949',
+        '#3c3c57',
+        '#ccccff',
+        '#ffffcc',
+        '#273627',
+        '#fda5ff',
+        '#223f22',
+        '#423535',
+        '#979748',
+        '#64a2a2',
+        '#8a9a95',
+        '#e9c062',
+        '#8cd763',
+        '#ffcccc',
+        '#555555',
+        '#ffa500',
+        '#cf6a4c',
+        '#7587a6',
+        '#f9ee98',
+        '#72bac4',
+        '#77ff00',
+        '#4a803c',
+        '#f8f8f8',
+        '#ff0100',
+        '#ffdcdc',
+        '#4a3f10',
+        '#472c47',
+        '#ffcdff',
+        '#68e868',
+        '#344350',
+        '#4ccccc'
+    ];
+}));
