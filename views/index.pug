@@ -3,13 +3,24 @@ extends layout.pug
 block content 
   div(class="col-xs-12 text-center")
     div(class="col-xs-12 text-center text-upper")
-      h5="Below are polls currently running..."
-      h5="click a poll to see the results and vote, or sign-in to make a new poll"
+      if polls.length
+        h5="Below are polls currently running..."
+        h5="click a poll to see the results and vote"
      
     div(class="col-xs-12 text-center")
       br
       div(class="list-group" id="poll")
-        each val in polls.length ? polls : ['There are no values']
-          a(href='/poll/view/' + val.uid class="list-group-item text-center list-group-item")
-            h4=val.title
-block foot 
+        if polls.length
+          each val,index in polls.length ? polls : ['There are no values']
+            a(href='/poll/view/' + val.uid class="list-group-item text-center list-group-item")
+              h4=index+1 + '. ' +val.title
+        else
+          h4="No polls yet :("
+      div(class="col-xs-12 text-center" style="padding-top:20px")
+
+        if authorised
+          div(class="col-xs-12 text-center" style="margin-top:10px")
+            a(href="/poll/create")="💡 go on, create make a new poll"
+        else
+          h5
+            a(href="/login")="💡 Sign-up or log-in to make a new poll"

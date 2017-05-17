@@ -1,0 +1,17 @@
+extends layout.pug
+block header
+    header      
+        div(class="container")
+        div(class="col-xs-12")
+            div(class="col-xs-6")
+            a(href="/" style="text-decoration:none")
+                h1 Let's ✔️ote
+
+block content 
+  div(class="col-xs-offset-3 col-xs-6 text-center")
+    div(class="col-xs-12 text-center text-upper")
+        a(href="/auth/twitter")
+            button(class="twitter btn btn-lg" type="submit") twitter 
+     
+    div(class="col-xs-12 text-center")
+      br

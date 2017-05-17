@@ -39,12 +39,12 @@ module.exports = function(app, passport, mongoose) {
                 }, polls);
             }).then(function(polls) {
                 res.render('index', {
-                    title: 'Poll for ',
+                    title: 'Let\'s vote',
                     message: '†††',
-                    authorised: true,
-                    user: (req.user),
+                    authorised: req.isAuthenticated(),
+                    user: (req.user) | [],
                     session: req.session,
-                    polls: polls
+                    polls: polls.length ? polls : []
                 });
             });
 
@@ -52,9 +52,13 @@ module.exports = function(app, passport, mongoose) {
 
     app.route('/login')
         .get(function(req, res) {
-            //res.render('index'); 
-            res.render('', { title: 'Hey', message: 'Hello there!' })
-                //res.sendFile(path + '/public/login.html');
+            res.render('login', {
+                title: 'Hey Hey Hey!',
+                message: '†††',
+                authorised: req.isAuthenticated(),
+                user: (req.user),
+                session: req.session
+            });
         });
 
     app.route('/logout')
@@ -66,25 +70,13 @@ module.exports = function(app, passport, mongoose) {
     app.route('/profile')
         .get(isLoggedIn, function(req, res) {
 
-            if (req.isAuthenticated()) {
-
-                res.render('profile', {
-                    title: 'Hey Hey Hey!',
-                    message: '†††',
-                    authorised: true,
-                    user: (req.user),
-                    session: req.session
-                });
-
-            } else {
-                res.render('index', {
-                    title: 'Hey Hey Hey!',
-                    message: '†††',
-                    authorised: false,
-                    user: null,
-                    session: req.session
-                });
-            }
+            res.render('profile', {
+                title: 'Hey Hey Hey!',
+                message: '†††',
+                authorised: req.isAuthenticated(),
+                user: (req.user),
+                session: req.session
+            });
 
         });
 
@@ -97,7 +89,7 @@ module.exports = function(app, passport, mongoose) {
             res.render('create_poll', {
                 title: 'Hey Hey Hey!',
                 message: '†††',
-                authorised: true,
+                authorised: req.isAuthenticated(),
                 user: (req.user),
                 session: req.session
             });
@@ -117,7 +109,7 @@ module.exports = function(app, passport, mongoose) {
             res.render('edit_poll', {
                 title: 'Poll for ',
                 message: '†††',
-                authorised: true,
+                authorised: req.isAuthenticated(),
                 user: (req.user),
                 session: req.session,
                 poll: req.user.twitter.polls[pollIndex],
@@ -127,24 +119,49 @@ module.exports = function(app, passport, mongoose) {
         });
     app.route('/poll/view/:id')
         .get(function(req, res) {
-
-            var pollIndex = _.findIndex(req.user.twitter.polls, { uid: req.params.id })
+            var User = mongoose.model('User');
+            var pollId = (req.params.id);
+            var optionAvailable = [];
+            var pollSelect = [];
             var options = [];
-            var words = req.user.twitter.polls[pollIndex].options;
-            for (var i = 0; i < words.length; i++) {
-                options.push({ 'name': words[i].name });
-            }
-            res.render('view_poll', {
-                title: 'Poll for ',
-                message: '†††',
-                authorised: true,
-                user: (req.user),
-                session: req.session,
-                poll: req.user.twitter.polls[pollIndex],
-                polloptions: options,
-                url: req.params.id
+            var promise = new Promise(function(resolve, reject) {
+
+                User.find({}, function(err, docs) {
+                    if (!err) {
+                        docs.forEach(function(user) {
+                            user.twitter.polls.forEach(function(poll) {
+                                if (poll.uid === pollId) {
+                                    pollSelect = (poll);
+                                    poll.options.forEach(function(element) {
+                                        optionAvailable.push(element.name.toString());
+                                    });
+                                }
+                            }, this);
+                        }, this);
+                        for (var i = 0; i < optionAvailable.length; i++) {
+                            options.push({ 'name': optionAvailable[i] });
+                        }
+                        resolve({ 'pollSelect': pollSelect, 'options': options });
+                    } else { throw err; };
+                }, this);
+
+            }).then(function(poll) {
+
+                res.render('view_poll', {
+                    title: 'Poll for ',
+                    message: '†††',
+                    authorised: req.isAuthenticated(),
+                    user: (req.user),
+                    session: req.session,
+                    poll: poll.pollSelect,
+                    polloptions: poll.options,
+                    url: req.params.id
+                });
             });
+
+
         });
+
     app.route('/poll/data/:id')
         .get(function(req, res) {
 
@@ -170,7 +187,7 @@ module.exports = function(app, passport, mongoose) {
                             }, this);
                             colors.ideaColorThemes
                             var pieColors = colors.ideaColorThemes.tauCeti.slice(0, optionAvailable.length);
-                              pollsdata.datasets.push({
+                            pollsdata.datasets.push({
                                 data: optionAvailable,
                                 borderWidth: 2,
                                 backgroundColor: pieColors,
@@ -181,7 +198,6 @@ module.exports = function(app, passport, mongoose) {
                                 highlightStroke: "rgba(220,220,220,1)"
                             });
                         }, this);
-                        console.log(pollsdata);
                         resolve(pollsdata);
                     } else { throw err; };
 
@@ -200,7 +216,7 @@ module.exports = function(app, passport, mongoose) {
             res.render('view_my_poll', {
                 title: 'Poll for ',
                 message: '†††',
-                authorised: true,
+                authorised: req.isAuthenticated(),
                 user: (req.user),
                 session: req.session,
                 polls: options
@@ -225,7 +241,7 @@ module.exports = function(app, passport, mongoose) {
                 res.render('view_poll', {
                     title: 'Poll for ',
                     message: '†††',
-                    authorised: true,
+                    authorised: req.isAuthenticated(),
                     user: (req.user),
                     session: req.session,
                     polls: polls
@@ -246,6 +262,7 @@ module.exports = function(app, passport, mongoose) {
             if (err) {
                 res.status(500).send(err);
             } else {
+
                 pollFound = (_.findWhere(user.twitter.polls, {
                     "uid": req.params.id,
                 }));
@@ -289,11 +306,58 @@ module.exports = function(app, passport, mongoose) {
         });
 
     });
-    app.route('/poll/vote/:id').post(isLoggedIn, function(req, res) {
+    app.route('/poll/delete/:id').post(isLoggedIn, function(req, res) {
+        var pollIndex = _.findIndex(req.user.twitter.polls, { uid: req.params.id })
         var User = mongoose.model('User');
 
+        var optset = [];
+        var newSet = [];
+
+        User.findById(req.user.id, function(err, user) {
+            // Handle any possible database errors
+            if (err) {
+                res.status(500).send(err);
+            } else {
+
+                var pollFound = (_.findWhere(user.twitter.polls, {
+                    "uid": req.params.id,
+                }));
+
+
+                // if poll exist 
+                if (pollFound !== undefined) {
+
+                    var pollIndex = _.findIndex(user.twitter.polls, { "uid": req.params.id })
+                    var newPolls = [];
+
+                    user.twitter.polls.forEach(function(poll, key) {
+                        if (poll.uid !== user.twitter.polls[key].uid) {
+                            newPolls.push(poll);
+                        }
+                    });
+                    user.twitter.polls = newPolls;
+
+                    user.markModified('twitter');
+
+                    user.save(function(err, user) {
+                        if (err) {
+
+                            res.status(500).send(err)
+                        } else {
+                            res.send(user.twitter.polls[pollIndex]);
+                        }
+                    });
+
+                } else {
+                    res.status(500).send(err);
+                }
+            }
+        });
+
+    });
+    app.route('/poll/vote/:id').post(function(req, res) {
+
         var options = req.body.options;
-        console.log(req.body);
         var optset = [];
         var newSet = [];
         var User = mongoose.model('User');
@@ -311,6 +375,7 @@ module.exports = function(app, passport, mongoose) {
                                     if (err) {
                                         res.status(500).send(err);
                                     } else {
+
                                         var pollFound = [];
                                         pollFound = (_.findIndex(user.twitter.polls, {
                                             "uid": req.params.id,
@@ -318,18 +383,13 @@ module.exports = function(app, passport, mongoose) {
 
                                         // if poll exist 
                                         if (pollFound > -1) {
-                                            console.log(pollFound);
-                                            console.log(req.body.options);
 
                                             var optionIndex = _.findIndex(user.twitter.polls[pollFound].options, { "name": req.body.options });
 
                                             var x = (poll.options[pollIndex].count | 0)
                                             poll.options[pollIndex].count = x++;
                                             user.twitter.polls[pollFound].options[optionIndex].count = x;
-                                            console.log(user.twitter.polls[pollFound].options[optionIndex]);
-
                                             user.markModified('twitter');
-
                                             user.save(function(err, user) {
                                                 if (err) {
                                                     res.status(500).send(err)
@@ -395,7 +455,6 @@ module.exports = function(app, passport, mongoose) {
                         //console.log(user.twitter.polls[pollIndex].options);
 
                     } else {
-                        console.log('--make new poll')
 
                         for (var i = 0; i < options.length; i++) {
                             // set  poll options

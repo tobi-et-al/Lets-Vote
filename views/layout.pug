@@ -15,8 +15,8 @@ html
           div(class="container")
             div(class="col-xs-12")
               div(class="col-xs-6")
-                a(href="/")
-                  h1(style="text-decoration:none") Let's ✔️ote
+                a(href="/" style="text-decoration:none")
+                  h1 Let's ✔️ote
                 div(class="col-xs-12")
 
               div(class="col-xs-6")
@@ -27,9 +27,8 @@ html
                   |  ]
                             
                 if authorised
-            
                   | Hello 
-                  strong=user.twitter.name 
+                  strong
                   |  [ 
                   a(href="/profile")
                     button(class="byeeee btn-link  btn-xs " type="submit") Profile 

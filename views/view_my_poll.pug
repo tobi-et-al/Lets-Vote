@@ -8,14 +8,18 @@ block content
     div(class="col-xs-12 text-center")
       br
       div(class="list-group" id="poll")
-        each val in polls.length ? polls : ['There are no values']
-          div(class="col-xs-12 list-group-item text-center list-group-item")
-            div(class="col-xs-11")
-              a(href='/poll/get/' + val.uid )
-                h4=val.title
+        if (polls.length)
+          each val in polls.length ? polls : ['There are no values']
+            div(class="col-xs-12 list-group-item text-center list-group-item" data-uid=val.uid)
+              div(class="col-xs-11")
+                a(href='/poll/get/' + val.uid )
+                  h4=val.title
+              div(class="col-xs-1")
+                  a(href='#' class="exit" onClick="confirm('Are you sure?')? deletePoll('"+val.uid+"') :false")
+                    h5="❌" 
+        else
+          h4="No polls yet :("
+          a(href="/poll/create")="💡 go on, create make a new poll"
 
-            div(class="col-xs-1")
-                a(href='#' class="exit")
-                  h5="❌"
 
 block foot 

@@ -104,14 +104,17 @@ footer>a {
     text-transform: capitalize;
     color: orangered;
 }
-.list-group-item  h4{
+
+.list-group-item h4 {
     color: orangered;
 }
-.notice{
+
+.notice {
     color: black;
     text-decoration: underline;
     text-transform: capitalize;
 }
+
 textarea {
     height: 208px !important;
 }
@@ -120,6 +123,23 @@ textarea {
     min-height: 30px;
     font-weight: bold;
 }
-.exit{
+
+.exit {
+    text-decoration: none;
+}
+
+.list-group-item a {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+select#options {
+    height: 27px;
+}
+
+a:hover {
     text-decoration: none;
 }
