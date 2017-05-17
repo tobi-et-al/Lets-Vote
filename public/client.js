@@ -44,7 +44,7 @@ $(function() {
                         type: 'doughnut',
                         data: data,
                         options: {
-                            responsive: true
+                            responsive: false
                         }
                     });
                 });

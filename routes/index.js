@@ -155,6 +155,7 @@ module.exports = function(app, passport, mongoose) {
                     session: req.session,
                     poll: poll.pollSelect,
                     polloptions: poll.options,
+                    source: encodeURIComponent(process.env.APP_PATH +'poll/view/'+req.params.id),
                     url: req.params.id
                 });
             });

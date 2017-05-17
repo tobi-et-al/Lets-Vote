@@ -21,11 +21,10 @@ block content
                                 option(class="list-group-item-heading")=val.name 
                         div(class="col-xs-12 clearfix result")  
                         div(class="col-xs-12 clearfix")  
-                            button(type="submit" value="submit" class="btn pull-right") submit
+                          a(class="btn" href="https://twitter.com/intent/tweet?url="+source +'&text='+ poll.title +  ' - ' )="Share on Twitter"
+                          button(type="submit" value="submit" class="btn pull-right") submit
             div(class="col-xs-6" id='view')
                 canvas(id="myChart" width="400" height="400")
-
-
 
 block footer
     footer(class="text-center col-xs-12")

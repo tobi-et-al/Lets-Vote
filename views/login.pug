@@ -1,17 +1,38 @@
+
 extends layout.pug
+
 block header
     header      
-        div(class="container")
+      div(class="container")
         div(class="col-xs-12")
-            div(class="col-xs-6")
+          div(class="col-xs-6")
             a(href="/" style="text-decoration:none")
-                h1 Let's ✔️ote
+              h1 Let's ✔️ote
+            div(class="col-xs-12")
 
+          div(class="col-xs-6") 
+
+            if authorised
+              | Hello 
+              strong
+              |  [ 
+              a(href="/profile")
+                button(class="byeeee btn-link  btn-xs " type="submit") Profile 
+              a(href="/poll/my")
+                button(class="byeeee btn-link  btn-xs " type="submit") My polls 
+              a(href="/poll/create")
+                button(class="byeeee btn-link  btn-xs " type="submit") create poll 
+              a(href="/logout")
+                button(class="byeeee btn-link  btn-xs " type="submit") Signout 
+              |  ]
 block content 
-  div(class="col-xs-offset-3 col-xs-6 text-center")
+  div(class="col-xs-12 col-sm-8 col-sm-offset-2 text-center")
     div(class="col-xs-12 text-center text-upper")
-        a(href="/auth/twitter")
-            button(class="twitter btn btn-lg" type="submit") twitter 
+      h5="sign in with "
      
     div(class="col-xs-12 text-center")
-      br
+
+      div(class="col-xs-offset-3 col-xs-6 text-center")
+        div(class="col-xs-12 text-center text-upper")
+            a(href="/auth/twitter")
+                button(class="twitter btn btn-lg" type="submit") twitter 

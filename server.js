@@ -14,7 +14,7 @@ var bodyParser = require('body-parser')
 
 require('./config/passport')(passport);
 
-mongoose.connect('mongodb://127.0.0.1:27017');
+mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
 app.use(express.static('public'));
@@ -41,7 +41,6 @@ app.use(passport.session());
 routes(app, passport, mongoose);
 
 // listen for requests :)
-var port = 8888;
-var listener = app.listen(port, function () {
-  console.log('Your app is listening on port ' + port);
+var listener = app.listen(process.env.PORT, function () {
+  console.log('Your app is listening on port ' + process.env.PORT);
 });
