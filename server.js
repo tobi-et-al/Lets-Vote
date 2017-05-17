@@ -41,7 +41,6 @@ app.use(passport.session());
 routes(app, passport, mongoose);
 
 // listen for requests :)
-var port = 8888;
-var listener = app.listen(port, function () {
-  console.log('Your app is listening on port ' + port);
+var listener = app.listen(process.env.PORT, function () {
+  console.log('Your app is listening on port ' + process.env.PORT);
 });
