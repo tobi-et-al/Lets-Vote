@@ -106,7 +106,6 @@ footer>a {
 }
 
 .list-group-item h4 {
-    color: orangered;
 }
 
 .notice {
@@ -142,4 +141,4 @@ select#options {
 
 a:hover {
     text-decoration: none;
-}
+} 

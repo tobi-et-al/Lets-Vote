@@ -14,7 +14,7 @@ var bodyParser = require('body-parser')
 
 require('./config/passport')(passport);
 
-mongoose.connect('mongodb://127.0.0.1:27017');
+mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
 app.use(express.static('public'));
